@@ -6,6 +6,7 @@ const colors = require('colors');
 const morgan = require('morgan');
 const mysql = require('mysql2/promise');
 const dbConfig = require('./config');
+const postsRouter = require('./routes/postsRoutes');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -22,6 +23,7 @@ app.get('/', (req, res) => {
 });
 
 // ROUTES
+app.use('/api/posts', postsRouter);
 
 // 404 - returns json
 app.use((req, res) => {
@@ -33,9 +35,9 @@ app.use((req, res) => {
 async function testDbConnection() {
   try {
     const conn = await mysql.createConnection(dbConfig);
-    const [rows] = await conn.query('SELECT 1');
+    await conn.query('SELECT 1');
     // console.log('rows ===', rows);
-    console.log('Connected to MYSQL DB '.bgCyan.bold);
+    console.log(`Connected to MYSQL DB: ${dbConfig.database} `.bgCyan.bold);
     conn.end();
   } catch (error) {
     console.log(`Error connecting to db ${error.message}`.bgRed.bold);
