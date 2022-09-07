@@ -7,6 +7,7 @@ const morgan = require('morgan');
 const mysql = require('mysql2/promise');
 const dbConfig = require('./config');
 const postsRouter = require('./routes/postsRoutes');
+const categoriesRouter = require('./routes/categoriesRoutes');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -24,6 +25,7 @@ app.get('/', (req, res) => {
 
 // ROUTES
 app.use('/api/posts', postsRouter);
+app.use('/api/categories', categoriesRouter);
 
 // 404 - returns json
 app.use((req, res) => {
