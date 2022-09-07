@@ -1,5 +1,6 @@
 // sukurti routeri categories
 const express = require('express');
+const { getAllCategries } = require('../model/categoryModel');
 const db = require('../utils/db');
 
 const categoriesRouter = express.Router();
@@ -8,9 +9,11 @@ const categoriesRouter = express.Router();
 
 categoriesRouter.get('/', async (req, res) => {
   try {
-    const sql = 'SELECT * FROM categories';
-    const [rows] = await db.query(sql);
-    res.status(200).json(rows);
+    // Model
+    const categories = await getAllCategries();
+
+    // controller
+    res.status(200).json(categories);
   } catch (error) {
     console.log('error ===', error);
     res.status(500).json({ msg: 'some stuff went sideways' });

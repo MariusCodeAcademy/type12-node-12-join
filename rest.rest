@@ -3,3 +3,6 @@ GET http://localhost:3000/api/posts
 ####
 
 GET http://localhost:3000/api/categories
+####
+
+GET http://localhost:3000/api/categories/count
