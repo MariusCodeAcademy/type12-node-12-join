@@ -33,8 +33,24 @@ async function deleteCategory(id) {
 }
 // addNewCategory(newCatName) - modelio funkcija prideti kategorijai
 
+/**
+ * modelio funkcija prideti kategorijai
+ * @param {string} newCatName
+ * @returns true if success
+ */
+async function addNewCategory(newCatName) {
+  const sql = 'INSERT INTO categories (name) VALUES (?)';
+  const [rows] = await db.execute(sql, [newCatName]);
+  // console.log('rows ===', rows);
+  if (rows.affectedRows === 1) {
+    return true;
+  }
+  return false;
+}
+
 module.exports = {
   getAllCategries,
   getAllCategoriesCounts,
   deleteCategory,
+  addNewCategory,
 };

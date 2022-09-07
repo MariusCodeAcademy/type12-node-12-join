@@ -4,6 +4,7 @@ const {
   getAllCategries,
   getAllCategoriesCounts,
   deleteCategory,
+  addNewCategory,
 } = require('../model/categoryModel');
 
 const categoriesRouter = express.Router();
@@ -53,5 +54,22 @@ categoriesRouter.delete('/:id', async (req, res) => {
 });
 
 // POST /api/categories - sukuria nauja categorija is body gautu duomenu
+categoriesRouter.post('/', async (req, res) => {
+  try {
+    const { name } = req.body;
+    if (await addNewCategory(name)) {
+      res.status(200).json({
+        msg: 'category created',
+      });
+      return;
+    }
+    res.status(400).json({
+      msg: 'nothing created',
+    });
+  } catch (error) {
+    console.log('error ===', error);
+    res.status(500).json({ msg: 'some stuff went sideways' });
+  }
+});
 
 module.exports = categoriesRouter;

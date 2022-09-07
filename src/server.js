@@ -14,6 +14,7 @@ const port = process.env.PORT || 5000;
 
 // Middleware
 app.use(morgan('dev'));
+app.use(express.json());
 // prisidedam morgan/cors
 // GET / - msg: server online
 

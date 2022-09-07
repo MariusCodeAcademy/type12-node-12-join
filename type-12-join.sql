@@ -86,7 +86,8 @@ CREATE TABLE `posts` (
   `p_id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `body` text NOT NULL,
-  `category_id` int(11) NOT NULL
+  `category_id` int(11) NOT NULL,
+  `user_id` INT NOT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 --
