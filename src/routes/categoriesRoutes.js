@@ -1,11 +1,12 @@
 // sukurti routeri categories
 const express = require('express');
-const {
-  getAllCategries,
-  getAllCategoriesCounts,
-  deleteCategory,
-  addNewCategory,
-} = require('../model/categoryModel');
+const MyCategory = require('../model/categoryModelOOP');
+// const {
+//   getAllCategries,
+//   getAllCategoriesCounts,
+//   deleteCategory,
+//   addNewCategory,
+// } = require('../model/categoryModel');
 
 const categoriesRouter = express.Router();
 
@@ -14,7 +15,7 @@ const categoriesRouter = express.Router();
 categoriesRouter.get('/', async (req, res) => {
   try {
     // Model
-    const categories = await getAllCategries();
+    const categories = await MyCategory.getAll();
     // controller
     res.status(200).json(categories);
   } catch (error) {
@@ -26,7 +27,7 @@ categoriesRouter.get('/', async (req, res) => {
 // GET /api/categories/count - parsiuncia kiek kurioje kategorijoje yra postu su pool
 categoriesRouter.get('/count', async (req, res) => {
   try {
-    const catsAndCounts = await getAllCategoriesCounts();
+    const catsAndCounts = await MyCategory.getCounts();
     res.status(200).json(catsAndCounts);
   } catch (error) {
     console.log('error ===', error);
@@ -38,7 +39,7 @@ categoriesRouter.get('/count', async (req, res) => {
 categoriesRouter.delete('/:id', async (req, res) => {
   const { id } = req.params;
   try {
-    if (await deleteCategory(id)) {
+    if (await MyCategory.delete(id)) {
       res.status(200).json({
         msg: 'category deleted',
       });
@@ -57,7 +58,10 @@ categoriesRouter.delete('/:id', async (req, res) => {
 categoriesRouter.post('/', async (req, res) => {
   try {
     const { name } = req.body;
-    if (await addNewCategory(name)) {
+
+    const category = new MyCategory(name);
+
+    if (await category.save()) {
       res.status(200).json({
         msg: 'category created',
       });
