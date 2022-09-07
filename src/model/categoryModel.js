@@ -31,7 +31,7 @@ async function deleteCategory(id) {
   }
   return false;
 }
-// addNewCategory() - modelio funkcija prideti kategorijai
+// addNewCategory(newCatName) - modelio funkcija prideti kategorijai
 
 module.exports = {
   getAllCategries,

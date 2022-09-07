@@ -52,4 +52,6 @@ categoriesRouter.delete('/:id', async (req, res) => {
   }
 });
 
+// POST /api/categories - sukuria nauja categorija is body gautu duomenu
+
 module.exports = categoriesRouter;
