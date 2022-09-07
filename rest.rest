@@ -1,6 +1,9 @@
 GET http://localhost:3000/api/posts
 
 ####
+GET http://localhost:3000/api/posts/all-info
+
+####
 
 GET http://localhost:3000/api/categories
 
@@ -9,3 +12,11 @@ DELETE http://localhost:3000/api/categories/6
 ####
 
 GET http://localhost:3000/api/categories/count
+
+#### Create new category
+POST http://localhost:3000/api/categories
+Content-Type: application/json
+
+{
+  "name": "007"
+}
