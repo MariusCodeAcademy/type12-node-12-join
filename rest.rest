@@ -3,6 +3,9 @@ GET http://localhost:3000/api/posts
 ####
 
 GET http://localhost:3000/api/categories
+
+#### DELETE CATEGORY
+DELETE http://localhost:3000/api/categories/6
 ####
 
 GET http://localhost:3000/api/categories/count
